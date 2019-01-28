@@ -54,9 +54,13 @@ UITextFieldDelegate
     [self setupLoginViewWithStorage:isStorage];
     [self setupLogoView];
     
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(95, QRD_LOGIN_TOP_SPACE + 192, QRD_SCREEN_WIDTH - 198, QRD_SCREEN_HEIGHT - QRD_LOGIN_TOP_SPACE - 340)];
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake((QRD_SCREEN_WIDTH-252)/2, QRD_SCREEN_HEIGHT/2 - 30, 252, 60)];
     self.imageView.image = [UIImage imageNamed:@"qn_niu"];
     [self.view insertSubview:_imageView atIndex:0];
+    
+    if (isStorage) {
+        self.imageView.frame = CGRectMake((QRD_SCREEN_WIDTH-252)/2, QRD_SCREEN_HEIGHT/2 + 60, 252, 60);
+    }
 }
 
 - (void)setupLoginViewWithStorage:(BOOL)storage {
@@ -97,24 +101,24 @@ UITextFieldDelegate
     [_setButton addTarget:self action:@selector(settingAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_setButton];
     
-    self.imageView.frame = CGRectMake(95, QRD_LOGIN_TOP_SPACE + 242, QRD_SCREEN_WIDTH - 190, QRD_SCREEN_HEIGHT - QRD_LOGIN_TOP_SPACE - 340);
+    self.imageView.frame = CGRectMake((QRD_SCREEN_WIDTH-252)/2, QRD_SCREEN_HEIGHT/2 + 60, 252, 60);
 }
 
 - (void)setupLogoView {
     CGFloat bottomSpace = QRD_SCREEN_HEIGHT - 60;
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(QRD_SCREEN_WIDTH/2 - 1, bottomSpace - 29, 2, 22)];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(QRD_SCREEN_WIDTH/2 + 12, bottomSpace - 29, 1.2, 22)];
     lineView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:lineView];
     
-    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(QRD_SCREEN_WIDTH/2 - 57, bottomSpace - 36, 36, 36)];
+    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(QRD_SCREEN_WIDTH/2 - 94, bottomSpace - 26, 95, 15)];
     logoImageView.image = [UIImage imageNamed:@"logo"];
     [self.view addSubview:logoImageView];
     
-    UILabel *logoLabel = [[UILabel alloc] initWithFrame:CGRectMake(QRD_SCREEN_WIDTH/2 + 19, bottomSpace - 36, 68, 36)];
+    UILabel *logoLabel = [[UILabel alloc] initWithFrame:CGRectMake(QRD_SCREEN_WIDTH/2 + 22, bottomSpace - 36, 68, 36)];
     logoLabel.textColor = [UIColor whiteColor];
     logoLabel.textAlignment = NSTextAlignmentLeft;
     logoLabel.font = QRD_LIGHT_FONT(16);
-    logoLabel.text = @"牛会议";
+    logoLabel.text = @"有因会议";
     [self.view addSubview:logoLabel];
 }
 

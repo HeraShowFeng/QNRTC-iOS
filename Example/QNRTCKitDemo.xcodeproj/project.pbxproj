@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5029EC5434AD3A66D8A128FD /* libPods-QNRTCKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8BB45036542B95EF652274E /* libPods-QNRTCKitDemo.a */; };
 		764940AF212507370025ED41 /* QRDMergeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 764940AE212507370025ED41 /* QRDMergeInfo.m */; };
-		76EB7FFC2122B624001D6EA5 /* launchImage@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76EB7FFB2122B624001D6EA5 /* launchImage@2x.jpg */; };
+		76EB7FFC2122B624001D6EA5 /* launchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76EB7FFB2122B624001D6EA5 /* launchImage@2x.png */; };
 		B06DBBD120F6270E009AE9F9 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06DBBCF20F6270E009AE9F9 /* ReplayKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B0769C6F1FBA97100051F9C2 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0769C6E1FBA97090051F9C2 /* VideoToolbox.framework */; };
 		B0769C751FBADAFD0051F9C2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0769C741FBADAF70051F9C2 /* GLKit.framework */; };
@@ -59,7 +59,7 @@
 		474E520E8ACB91CC17307E39 /* Pods-QNRTCKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QNRTCKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QNRTCKitDemo/Pods-QNRTCKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		764940AD212507370025ED41 /* QRDMergeInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRDMergeInfo.h; sourceTree = "<group>"; };
 		764940AE212507370025ED41 /* QRDMergeInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRDMergeInfo.m; sourceTree = "<group>"; };
-		76EB7FFB2122B624001D6EA5 /* launchImage@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "launchImage@2x.jpg"; sourceTree = "<group>"; };
+		76EB7FFB2122B624001D6EA5 /* launchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launchImage@2x.png"; sourceTree = "<group>"; };
 		B04AF08A1F9652A6009BAFEF /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		B04AF08C1F9652C7009BAFEF /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		B06DBBCF20F6270E009AE9F9 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
@@ -214,7 +214,7 @@
 				B0C660631F94F98300999C9F /* Assets.xcassets */,
 				B0C660651F94F98300999C9F /* LaunchScreen.storyboard */,
 				B0C660681F94F98300999C9F /* Info.plist */,
-				76EB7FFB2122B624001D6EA5 /* launchImage@2x.jpg */,
+				76EB7FFB2122B624001D6EA5 /* launchImage@2x.png */,
 				B0C660691F94F98300999C9F /* main.m */,
 			);
 			path = QNRTCKitDemo;
@@ -314,7 +314,7 @@
 				B07BB0C72064E61D009218C1 /* user_agreement.html in Resources */,
 				BC0F654F21B80CFB006C1A0B /* noChoose@2x.png in Resources */,
 				B07BB0CC2064E670009218C1 /* QRDAgreementViewController.xib in Resources */,
-				76EB7FFC2122B624001D6EA5 /* launchImage@2x.jpg in Resources */,
+				76EB7FFC2122B624001D6EA5 /* launchImage@2x.png in Resources */,
 				B0C660641F94F98300999C9F /* Assets.xcassets in Resources */,
 				BC0F655621B80D71006C1A0B /* set_back@3x.png in Resources */,
 				B0C660621F94F98300999C9F /* Main.storyboard in Resources */,
