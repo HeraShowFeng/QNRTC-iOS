@@ -22,23 +22,30 @@
      此处服务器 URL 仅用于 Demo 测试，随时可能修改/失效，请勿用于 App 线上环境！！
      此处服务器 URL 仅用于 Demo 测试，随时可能修改/失效，请勿用于 App 线上环境！！
      */
-    NSURL *requestUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://api-demo.qnsdk.com/v1/rtc/token/admin/app/%@/room/%@/user/%@?bundleId=%@", appId, roomName, userId, [[NSBundle mainBundle] bundleIdentifier]]];
+    NSURL *requestUrl = [NSURL URLWithString:@"https://live.youinsh.com/api/webrtc/room_token/"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestUrl];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    request.HTTPMethod = @"GET";
+    
+    NSDictionary *dataDic = @{@"room_id":roomName,@"username":userId};
+    NSData *bodyData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:nil];
+    [request setHTTPBody:bodyData];
+    request.HTTPMethod = @"POST";
     request.timeoutInterval = 10;
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
+        NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
+        if (error || resp.statusCode != 200) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completionHandler(error, nil);
             });
             return;
         }
         
-        NSString *token = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSDictionary *tokenDic = resultDic[@"result"];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            completionHandler(nil, token);
+            completionHandler(nil, tokenDic[@"room_token"]);
         });
     }];
     [task resume];

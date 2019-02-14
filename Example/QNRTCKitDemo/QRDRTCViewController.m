@@ -98,7 +98,7 @@
         if (error) {
             [wself addLogString:error.description];
             [wself.view showFailTip:error.description];
-            wself.title = @"请求 token 出错，请检查网络";
+            wself.title = @"获取 room token 失败，请检查房间是否存在及网络配置";
         } else {
             NSString *str = [NSString stringWithFormat:@"获取到 token: %@", token];
             [wself addLogString:str];
