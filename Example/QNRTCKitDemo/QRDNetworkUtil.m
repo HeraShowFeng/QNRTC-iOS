@@ -22,7 +22,10 @@
      此处服务器 URL 仅用于 Demo 测试，随时可能修改/失效，请勿用于 App 线上环境！！
      此处服务器 URL 仅用于 Demo 测试，随时可能修改/失效，请勿用于 App 线上环境！！
      */
-    NSURL *requestUrl = [NSURL URLWithString:@"https://live.youinsh.com/api/webrtc/room_token/"];
+    
+    // 测试2 url
+    NSURL *requestUrl = [NSURL URLWithString:@"https://live.test2.youinsh.cn/api/webrtc/room_token/"];
+//    NSURL *requestUrl = [NSURL URLWithString:@"https://live.youinsh.com/api/webrtc/room_token/"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:requestUrl];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
