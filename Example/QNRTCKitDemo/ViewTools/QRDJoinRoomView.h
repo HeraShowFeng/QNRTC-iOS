@@ -11,10 +11,5 @@
 @interface QRDJoinRoomView : UIView
 @property (nonatomic, strong) UITextField *roomTextField;
 @property (nonatomic, strong) UIButton *joinButton;
-@property (nonatomic, strong) UIButton *liveButton;
-@property (nonatomic, strong) UIButton *confButton;
-@property (nonatomic, strong) UIButton *audioCallButton;
-@property (nonatomic, strong) UIButton *screenButton;
-@property (nonatomic, strong) UIButton *multiTrackButton;
 
 @end

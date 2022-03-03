@@ -31,6 +31,8 @@
     if (self) {
         
         self.backgroundColor = [UIColor colorWithRed:random()%200/255.0 green:random()%200/255.0 blue:random()%100/255.0 alpha:1];
+        self.layer.borderWidth = 1;
+        self.layer.borderColor = [UIColor blackColor].CGColor;
         
         _traks = [[NSMutableArray alloc] init];
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];

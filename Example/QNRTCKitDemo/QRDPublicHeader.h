@@ -22,8 +22,14 @@
 #define QRD_SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
 #define QRD_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+#define QND_iPhoneXR ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) : NO)
+#define QND_iPhoneXSMAX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) : NO)
+#define QND_iPhoneP ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+#define QND_iPhone12 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake( 1170, 2532), [[UIScreen mainScreen] currentMode].size) : NO)
+#define QND_iPhone12Mini ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1080, 2340), [[UIScreen mainScreen] currentMode].size) : NO)
+#define QND_iPhone13Max ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1284, 2778), [[UIScreen mainScreen] currentMode].size) : NO)
 
-#define QRD_LOGIN_TOP_SPACE (QRD_iPhoneX ? 140: 100)
+#define QRD_LOGIN_TOP_SPACE (QRD_iPhoneX || QND_iPhoneXR || QND_iPhoneXSMAX || QND_iPhoneP || QND_iPhone12 || QND_iPhone12Mini || QND_iPhone13Max ? 140: 100)
 
 /*********************  颜色  *********************/
 // 颜色RGB 通用
@@ -55,7 +61,6 @@
 // userDefault Key
 #define QN_USER_ID_KEY @"QN_USER_ID"
 #define QN_APP_ID_KEY @"QN_APP_ID"
-#define QN_SET_CONFIG_KEY @"QN_SET_CONFIG"
 #define QN_ROOM_NAME_KEY @"QN_ROOM_NAME"
 #define QN_RTC_DEMO_APPID @"d8lk7l4ed"
 

@@ -44,7 +44,6 @@
 @implementation QRDBaseViewController
 
 - (void)dealloc {
-    [QNRTC deinit];
     self.tableView.delegate = nil;
     self.tableView.dataSource = nil;
     NSLog(@"[dealloc]==> %@", self.description);
@@ -88,7 +87,7 @@
     [self.renderBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.bottom.equalTo(self.mas_bottomLayoutGuide);
+        make.bottom.equalTo(self.view);
     }];
     
     [self setupLogUI];
@@ -235,7 +234,7 @@
                     make.left.equalTo(preView ? preView.mas_right : self.renderBackgroundView);
                     make.top.equalTo(upView ? upView.mas_bottom : self.renderBackgroundView);
                     make.width.equalTo(self.renderBackgroundView).multipliedBy(1.0/col);
-                    //                make.size.equalTo(self.renderBackgroundView).multipliedBy(1.0/col);
+  //                make.size.equalTo(self.renderBackgroundView).multipliedBy(1.0/col);
                     make.height.equalTo(view.width);
                 }];
                 

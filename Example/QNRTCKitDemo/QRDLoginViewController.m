@@ -8,16 +8,10 @@
 
 #import "QRDLoginViewController.h"
 #import "QRDSettingViewController.h"
-#import "QRDRTCViewController.h"
 #import "QRDAgreementViewController.h"
 #import "QRDUserNameView.h"
 #import "QRDJoinRoomView.h"
-#import "QRDScreenRecorderViewController.h"
-#import "QRDScreenMainViewController.h"
 #import "QRDPureAudioViewController.h"
-#import "QRDPlayerViewController.h"
-
-#define QRD_LOGIN_TOP_SPACE (QRD_iPhoneX ? 140: 100)
 
 @interface QRDLoginViewController ()
 <
@@ -88,20 +82,11 @@ UITextFieldDelegate
     // 直接使用缓存房间名时，不走 textFieldDidEndEditing 影响判断，故先做校验并返回结果
     _resultCorrect = [self checkRoomName:roomName];
     [self.view addSubview:_joinRoomView];
-
-    _joinRoomView.confButton.selected = YES;
-    [_joinRoomView.confButton addTarget:self action:@selector(confButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_joinRoomView.audioCallButton addTarget:self action:@selector(audioCallButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_joinRoomView.screenButton addTarget:self action:@selector(screenButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [_joinRoomView.joinButton addTarget:self action:@selector(joinAction:) forControlEvents:UIControlEventTouchUpInside];
-
-    [_joinRoomView.liveButton addTarget:self action:@selector(liveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [_joinRoomView.multiTrackButton addTarget:self action:@selector(multiTrackButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     _setButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _setButton.frame = CGRectMake(QRD_SCREEN_WIDTH - 36, QRD_LOGIN_TOP_SPACE - 68, 24, 24);
+    _setButton.frame = CGRectMake(QRD_SCREEN_WIDTH - 46, QRD_LOGIN_TOP_SPACE - 68, 24, 24);
     [_setButton setImage:[UIImage imageNamed:@"setting"] forState:UIControlStateNormal];
     [_setButton addTarget:self action:@selector(settingAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_setButton];
@@ -123,7 +108,7 @@ UITextFieldDelegate
     logoLabel.textColor = [UIColor whiteColor];
     logoLabel.textAlignment = NSTextAlignmentLeft;
     logoLabel.font = QRD_LIGHT_FONT(16);
-    logoLabel.text = @"牛会议";
+    logoLabel.text = @"语音会议";
     [self.view addSubview:logoLabel];
 }
 
@@ -167,15 +152,6 @@ UITextFieldDelegate
         return;
     }
 
-    NSDictionary *configDic = [[NSUserDefaults standardUserDefaults] objectForKey:QN_SET_CONFIG_KEY];
-    if (!configDic) {
-        configDic = @{@"VideoSize":NSStringFromCGSize(CGSizeMake(480, 640)), @"FrameRate":@15, @"Bitrate":@(400*1000)};
-    } else if (![configDic objectForKey:@"Bitrate"]) {
-        // 如果不存在 Bitrate key，做一下兼容处理
-        configDic = @{@"VideoSize":NSStringFromCGSize(CGSizeMake(480, 640)), @"FrameRate":@15, @"Bitrate":@(400*1000)};
-        [[NSUserDefaults standardUserDefaults] setObject:configDic forKey:QN_SET_CONFIG_KEY];
-    }
-
     [[NSUserDefaults standardUserDefaults] setObject:roomName forKey:QN_ROOM_NAME_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -183,33 +159,10 @@ UITextFieldDelegate
     if (![self checkUserId:_userString]) {
         [self showAlertWithMessage:@"请点击右上角设置按钮，将昵称修改正确并保存后，再进房间！\n Please click the Settings button in the upper right corner，after the nickname is modified correctly and saved successfully，then enter the room again！"];
     } else{
-        if (_joinRoomView.confButton.selected) {
-            // 连麦主入口
-            QRDRTCViewController *rtcVC = [[QRDRTCViewController alloc] init];
-            rtcVC.configDic = configDic;
-            rtcVC.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:rtcVC animated:YES completion:nil];
-        }
-        else if (_joinRoomView.audioCallButton.selected) {
-            // 纯音频连麦入口
-            QRDPureAudioViewController *rtcVC = [[QRDPureAudioViewController alloc] init];
-            rtcVC.configDic = configDic;
-            rtcVC.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:rtcVC animated:YES completion:nil];
-        }
-        else if (_joinRoomView.screenButton.selected) {
-            // 录屏入口
-            QRDScreenRecorderViewController *recorderViewController = [[QRDScreenRecorderViewController alloc] init];
-            recorderViewController.configDic = configDic;
-            recorderViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:recorderViewController animated:YES completion:nil];
-        } else if (_joinRoomView.multiTrackButton.selected) {
-            // 录屏连麦入口
-            QRDScreenMainViewController *vc = [[QRDScreenMainViewController alloc] init];
-            vc.configDic = configDic;
-            vc.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:vc animated:YES completion:nil];
-        }
+        // 纯音频连麦入口
+        QRDPureAudioViewController *rtcVC = [[QRDPureAudioViewController alloc] init];
+        rtcVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:rtcVC animated:YES completion:nil];
     }
 }
 
@@ -240,10 +193,6 @@ UITextFieldDelegate
     // 校验缓存的 userId
     if (![self checkUserId:_userString]) {
         [self showAlertWithMessage:@"请点击右上角设置按钮，将昵称修改正确并保存后，再进房间！\n Please click the Settings button in the upper right corner，after the nickname is modified correctly and saved successfully，then enter the room again！"];
-    } else{
-        QRDPlayerViewController *playerViewController = [[QRDPlayerViewController alloc] init];
-        playerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self presentViewController:playerViewController animated:YES completion:nil];
     }
 }
 
