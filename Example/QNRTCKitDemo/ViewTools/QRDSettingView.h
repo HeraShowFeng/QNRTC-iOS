@@ -13,7 +13,8 @@
 @property (nonatomic, strong) UITextField *userTextField;
 @property (nonatomic, strong) UITextField *appIdTextField;
 @property (nonatomic, strong) UIButton *saveButton;
+@property (nonatomic, strong) UISwitch *redundantSwitch;
 
-- (instancetype)initWithFrame:(CGRect)frame placeholderText:(NSString *)placeholderText appIdText:(NSString *)appIdText;
+- (instancetype)initWithFrame:(CGRect)frame placeholderText:(NSString *)placeholderText appIdText:(NSString *)appIdText redundantEnable:(BOOL)redundantEnable;
 
 @end

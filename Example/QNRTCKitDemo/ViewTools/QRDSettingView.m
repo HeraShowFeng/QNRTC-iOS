@@ -13,18 +13,19 @@
 @property (nonatomic, assign) CGFloat viewWidth;
 @property (nonatomic, copy) NSString *placeholderText;
 @property (nonatomic, copy) NSString *appIdText;
-
+@property (nonatomic, assign) BOOL redundantEnable;
 @end
 
 @implementation QRDSettingView
 
-- (id)initWithFrame:(CGRect)frame placeholderText:(NSString *)placeholderText appIdText:(NSString *)appIdText{
+- (id)initWithFrame:(CGRect)frame placeholderText:(NSString *)placeholderText appIdText:(NSString *)appIdText redundantEnable:(BOOL)redundantEnable {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         _viewWidth = CGRectGetWidth(frame);
         _placeholderText = placeholderText;
         _appIdText = appIdText;
+        _redundantEnable = redundantEnable;
         [self initSettingView];
     }
     return self;
@@ -90,6 +91,17 @@
     idHintLabel.text = @"请输入您的企业专用AppID";
     idHintLabel.font = QRD_LIGHT_FONT(10);
     [self addSubview:idHintLabel];
+    
+    UILabel *redundantLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 164, 40, 40)];
+    redundantLabel.textColor = [UIColor grayColor];
+    redundantLabel.font = [UIFont systemFontOfSize:12];
+    redundantLabel.text = @"RED";
+    [redundantLabel sizeToFit];
+    [self addSubview:redundantLabel];
+    
+    self.redundantSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(60, 164, 60, 40)];
+    [self.redundantSwitch sizeToFit];
+    [self addSubview:_redundantSwitch];
     
     self.saveButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 180, _viewWidth - 10, 40)];
     self.saveButton.backgroundColor = QRD_COLOR_RGBA(52,170,220,1);

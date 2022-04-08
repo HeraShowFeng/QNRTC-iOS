@@ -47,6 +47,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL allowAudioMixWithOthers;
 
 /*!
+ * @abstract 是否开启音频冗余功能，默认为 YES
+ *
+ * @since v3.1.0
+ */
+@property (nonatomic, assign) BOOL audioRedundantEnable;
+
+/*!
  * @abstract 用默认参数生成一个对象
  *
  * @since v4.0.0

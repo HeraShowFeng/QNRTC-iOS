@@ -44,6 +44,7 @@ QNRemoteTrackDelegate
 @property (nonatomic, readonly) NSString *userId;
 @property (nonatomic, readonly) NSString *appId;
 @property (nonatomic, readonly) NSString *roomName;
+@property (nonatomic, readonly) BOOL redundantEnable;
 @property (nonatomic, readonly) BOOL isAdmin;
 @property (nonatomic, strong) UITapGestureRecognizer *singleTap;
 

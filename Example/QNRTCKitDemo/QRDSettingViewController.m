@@ -56,6 +56,7 @@ UITextFieldDelegate
     if ([self checkStringLengthZero:appIdText]) {
         appIdText = QN_RTC_DEMO_APPID;
     }
+    BOOL redundantEnable = [self getValueForKey:QN_REDUNDANT_ENABLE_KEY];
     
     _setingView = [[QRDSettingView alloc] initWithFrame:CGRectMake(QRD_SCREEN_WIDTH/2 - 150, QRD_LOGIN_TOP_SPACE, 308, 500) placeholderText:placeholderText appIdText:appIdText];
     _setingView.userTextField.delegate = self;

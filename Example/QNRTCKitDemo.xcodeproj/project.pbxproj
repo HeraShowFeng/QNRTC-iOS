@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		5029EC5434AD3A66D8A128FD /* libPods-QNRTCKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8BB45036542B95EF652274E /* libPods-QNRTCKitDemo.a */; };
 		76EB7FFC2122B624001D6EA5 /* launchImage@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76EB7FFB2122B624001D6EA5 /* launchImage@2x.jpg */; };
-		AAA3282F27D06A3000A80BFB /* QRDSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3282E27D06A3000A80BFB /* QRDSettingView.m */; };
 		AAA3283727D06CE400A80BFB /* QNRTCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AAA3283027D06C3200A80BFB /* QNRTCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AAA3283927D06D2100A80BFB /* HappyDNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA3283827D06D2100A80BFB /* HappyDNS.framework */; platformFilter = ios; };
 		AAA3283A27D06D3600A80BFB /* HappyDNS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AAA3283427D06C9A00A80BFB /* HappyDNS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AAA3285A27D1AC4500A80BFB /* QRDJoinRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3285227D1AC4500A80BFB /* QRDJoinRoomView.m */; };
+		AAA3285B27D1AC4500A80BFB /* QRDUserNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3285627D1AC4500A80BFB /* QRDUserNameView.m */; };
+		AAA3285C27D1AC4500A80BFB /* QRDSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3285827D1AC4500A80BFB /* QRDSettingView.m */; };
+		AAA3285D27D1AC4500A80BFB /* UIView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3285927D1AC4500A80BFB /* UIView+Alert.m */; };
 		B06DBBD120F6270E009AE9F9 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06DBBCF20F6270E009AE9F9 /* ReplayKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B0769C6F1FBA97100051F9C2 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0769C6E1FBA97090051F9C2 /* VideoToolbox.framework */; };
 		B0769C751FBADAFD0051F9C2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0769C741FBADAF70051F9C2 /* GLKit.framework */; };
@@ -25,18 +28,11 @@
 		B0C660641F94F98300999C9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0C660631F94F98300999C9F /* Assets.xcassets */; };
 		B0C660671F94F98300999C9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0C660651F94F98300999C9F /* LaunchScreen.storyboard */; };
 		B0C6606A1F94F98300999C9F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C660691F94F98300999C9F /* main.m */; };
-		BC0F652921B7708C006C1A0B /* UIView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F652721B7708C006C1A0B /* UIView+Alert.m */; };
 		BC0F653A21B78257006C1A0B /* QRDNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F653921B78257006C1A0B /* QRDNetworkUtil.m */; };
 		BC0F654121B7A371006C1A0B /* QRDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F653C21B7A371006C1A0B /* QRDBaseViewController.m */; };
 		BC0F654321B7A371006C1A0B /* QRDUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0F654021B7A371006C1A0B /* QRDUserView.m */; };
-		BC0F654E21B80CFB006C1A0B /* noChoose@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0F654B21B80CFB006C1A0B /* noChoose@3x.png */; };
-		BC0F654F21B80CFB006C1A0B /* noChoose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0F654D21B80CFB006C1A0B /* noChoose@2x.png */; };
-		BC0F655621B80D71006C1A0B /* set_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0F655421B80D71006C1A0B /* set_back@3x.png */; };
-		BC0F655721B80D71006C1A0B /* set_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0F655521B80D71006C1A0B /* set_back@2x.png */; };
 		BC99862121C8E7D3000E8942 /* QRDPureAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC99862021C8E7D3000E8942 /* QRDPureAudioViewController.m */; };
 		C30F0F83200F416500A2A1CA /* QRDSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C30F0F82200F416500A2A1CA /* QRDSettingViewController.m */; };
-		C30F0F8D200F58EF00A2A1CA /* QRDJoinRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = C30F0F8A200F58EF00A2A1CA /* QRDJoinRoomView.m */; };
-		C30F0F8E200F58EF00A2A1CA /* QRDUserNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = C30F0F8C200F58EF00A2A1CA /* QRDUserNameView.m */; };
 		C3F800C8200E012A00ECDDC9 /* QRDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F800C7200E012A00ECDDC9 /* QRDLoginViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -67,11 +63,17 @@
 /* Begin PBXFileReference section */
 		474E520E8ACB91CC17307E39 /* Pods-QNRTCKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QNRTCKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QNRTCKitDemo/Pods-QNRTCKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		76EB7FFB2122B624001D6EA5 /* launchImage@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "launchImage@2x.jpg"; sourceTree = "<group>"; };
-		AAA3282D27D06A3000A80BFB /* QRDSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRDSettingView.h; sourceTree = "<group>"; };
-		AAA3282E27D06A3000A80BFB /* QRDSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRDSettingView.m; sourceTree = "<group>"; };
 		AAA3283027D06C3200A80BFB /* QNRTCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QNRTCKit.framework; sourceTree = "<group>"; };
 		AAA3283427D06C9A00A80BFB /* HappyDNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HappyDNS.framework; path = QNRTCKitDemo/HappyDNS.framework; sourceTree = "<group>"; };
 		AAA3283827D06D2100A80BFB /* HappyDNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HappyDNS.framework; sourceTree = "<group>"; };
+		AAA3285227D1AC4500A80BFB /* QRDJoinRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRDJoinRoomView.m; sourceTree = "<group>"; };
+		AAA3285327D1AC4500A80BFB /* QRDUserNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRDUserNameView.h; sourceTree = "<group>"; };
+		AAA3285427D1AC4500A80BFB /* QRDSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRDSettingView.h; sourceTree = "<group>"; };
+		AAA3285527D1AC4500A80BFB /* UIView+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Alert.h"; sourceTree = "<group>"; };
+		AAA3285627D1AC4500A80BFB /* QRDUserNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRDUserNameView.m; sourceTree = "<group>"; };
+		AAA3285727D1AC4500A80BFB /* QRDJoinRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRDJoinRoomView.h; sourceTree = "<group>"; };
+		AAA3285827D1AC4500A80BFB /* QRDSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRDSettingView.m; sourceTree = "<group>"; };
+		AAA3285927D1AC4500A80BFB /* UIView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Alert.m"; sourceTree = "<group>"; };
 		B04AF08A1F9652A6009BAFEF /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		B04AF08C1F9652C7009BAFEF /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		B06DBBCF20F6270E009AE9F9 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
@@ -94,26 +96,16 @@
 		B0C660661F94F98300999C9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B0C660681F94F98300999C9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0C660691F94F98300999C9F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BC0F652721B7708C006C1A0B /* UIView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Alert.m"; sourceTree = "<group>"; };
-		BC0F652821B7708C006C1A0B /* UIView+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Alert.h"; sourceTree = "<group>"; };
 		BC0F653621B78257006C1A0B /* QRDNetworkUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRDNetworkUtil.h; sourceTree = "<group>"; };
 		BC0F653921B78257006C1A0B /* QRDNetworkUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRDNetworkUtil.m; sourceTree = "<group>"; };
 		BC0F653B21B7A371006C1A0B /* QRDBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRDBaseViewController.h; sourceTree = "<group>"; };
 		BC0F653C21B7A371006C1A0B /* QRDBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRDBaseViewController.m; sourceTree = "<group>"; };
 		BC0F653F21B7A371006C1A0B /* QRDUserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRDUserView.h; sourceTree = "<group>"; };
 		BC0F654021B7A371006C1A0B /* QRDUserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRDUserView.m; sourceTree = "<group>"; };
-		BC0F654B21B80CFB006C1A0B /* noChoose@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noChoose@3x.png"; sourceTree = "<group>"; };
-		BC0F654D21B80CFB006C1A0B /* noChoose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noChoose@2x.png"; sourceTree = "<group>"; };
-		BC0F655421B80D71006C1A0B /* set_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set_back@3x.png"; sourceTree = "<group>"; };
-		BC0F655521B80D71006C1A0B /* set_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set_back@2x.png"; sourceTree = "<group>"; };
 		BC99861F21C8E7D3000E8942 /* QRDPureAudioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRDPureAudioViewController.h; sourceTree = "<group>"; };
 		BC99862021C8E7D3000E8942 /* QRDPureAudioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRDPureAudioViewController.m; sourceTree = "<group>"; };
 		C30F0F81200F416500A2A1CA /* QRDSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRDSettingViewController.h; sourceTree = "<group>"; };
 		C30F0F82200F416500A2A1CA /* QRDSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRDSettingViewController.m; sourceTree = "<group>"; };
-		C30F0F89200F58EF00A2A1CA /* QRDJoinRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRDJoinRoomView.h; sourceTree = "<group>"; };
-		C30F0F8A200F58EF00A2A1CA /* QRDJoinRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRDJoinRoomView.m; sourceTree = "<group>"; };
-		C30F0F8B200F58EF00A2A1CA /* QRDUserNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRDUserNameView.h; sourceTree = "<group>"; };
-		C30F0F8C200F58EF00A2A1CA /* QRDUserNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRDUserNameView.m; sourceTree = "<group>"; };
 		C3F800A9200CB41600ECDDC9 /* QRDPublicHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRDPublicHeader.h; sourceTree = "<group>"; };
 		C3F800C6200E012A00ECDDC9 /* QRDLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRDLoginViewController.h; sourceTree = "<group>"; };
 		C3F800C7200E012A00ECDDC9 /* QRDLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRDLoginViewController.m; sourceTree = "<group>"; };
@@ -144,6 +136,21 @@
 				474E520E8ACB91CC17307E39 /* Pods-QNRTCKitDemo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		AAA3285127D1AC4500A80BFB /* ViewTools */ = {
+			isa = PBXGroup;
+			children = (
+				AAA3285227D1AC4500A80BFB /* QRDJoinRoomView.m */,
+				AAA3285327D1AC4500A80BFB /* QRDUserNameView.h */,
+				AAA3285427D1AC4500A80BFB /* QRDSettingView.h */,
+				AAA3285527D1AC4500A80BFB /* UIView+Alert.h */,
+				AAA3285627D1AC4500A80BFB /* QRDUserNameView.m */,
+				AAA3285727D1AC4500A80BFB /* QRDJoinRoomView.h */,
+				AAA3285827D1AC4500A80BFB /* QRDSettingView.m */,
+				AAA3285927D1AC4500A80BFB /* UIView+Alert.m */,
+			);
+			path = ViewTools;
 			sourceTree = "<group>";
 		};
 		B04AF0891F9652A6009BAFEF /* Frameworks */ = {
@@ -203,7 +210,7 @@
 				BC0F654021B7A371006C1A0B /* QRDUserView.m */,
 				BC0F653621B78257006C1A0B /* QRDNetworkUtil.h */,
 				BC0F653921B78257006C1A0B /* QRDNetworkUtil.m */,
-				C30F0F88200F58EF00A2A1CA /* ViewTools */,
+				AAA3285127D1AC4500A80BFB /* ViewTools */,
 				C3F800A9200CB41600ECDDC9 /* QRDPublicHeader.h */,
 				AAA3283027D06C3200A80BFB /* QNRTCKit.framework */,
 				AAA3283827D06D2100A80BFB /* HappyDNS.framework */,
@@ -216,25 +223,6 @@
 				B0C660691F94F98300999C9F /* main.m */,
 			);
 			path = QNRTCKitDemo;
-			sourceTree = "<group>";
-		};
-		C30F0F88200F58EF00A2A1CA /* ViewTools */ = {
-			isa = PBXGroup;
-			children = (
-				AAA3282D27D06A3000A80BFB /* QRDSettingView.h */,
-				AAA3282E27D06A3000A80BFB /* QRDSettingView.m */,
-				C30F0F8B200F58EF00A2A1CA /* QRDUserNameView.h */,
-				C30F0F8C200F58EF00A2A1CA /* QRDUserNameView.m */,
-				C30F0F89200F58EF00A2A1CA /* QRDJoinRoomView.h */,
-				C30F0F8A200F58EF00A2A1CA /* QRDJoinRoomView.m */,
-				BC0F652821B7708C006C1A0B /* UIView+Alert.h */,
-				BC0F652721B7708C006C1A0B /* UIView+Alert.m */,
-				BC0F654D21B80CFB006C1A0B /* noChoose@2x.png */,
-				BC0F654B21B80CFB006C1A0B /* noChoose@3x.png */,
-				BC0F655521B80D71006C1A0B /* set_back@2x.png */,
-				BC0F655421B80D71006C1A0B /* set_back@3x.png */,
-			);
-			path = ViewTools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,16 +294,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC0F655721B80D71006C1A0B /* set_back@2x.png in Resources */,
 				B0C660671F94F98300999C9F /* LaunchScreen.storyboard in Resources */,
 				B07BB0C72064E61D009218C1 /* user_agreement.html in Resources */,
-				BC0F654F21B80CFB006C1A0B /* noChoose@2x.png in Resources */,
 				B07BB0CC2064E670009218C1 /* QRDAgreementViewController.xib in Resources */,
 				76EB7FFC2122B624001D6EA5 /* launchImage@2x.jpg in Resources */,
 				B0C660641F94F98300999C9F /* Assets.xcassets in Resources */,
-				BC0F655621B80D71006C1A0B /* set_back@3x.png in Resources */,
 				B0C660621F94F98300999C9F /* Main.storyboard in Resources */,
-				BC0F654E21B80CFB006C1A0B /* noChoose@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,18 +383,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC0F654121B7A371006C1A0B /* QRDBaseViewController.m in Sources */,
-				C30F0F8E200F58EF00A2A1CA /* QRDUserNameView.m in Sources */,
+				AAA3285D27D1AC4500A80BFB /* UIView+Alert.m in Sources */,
 				C3F800C8200E012A00ECDDC9 /* QRDLoginViewController.m in Sources */,
 				BC99862121C8E7D3000E8942 /* QRDPureAudioViewController.m in Sources */,
-				C30F0F8D200F58EF00A2A1CA /* QRDJoinRoomView.m in Sources */,
 				C30F0F83200F416500A2A1CA /* QRDSettingViewController.m in Sources */,
 				B0A335E420D2E39600098E94 /* QRDMicrophoneSource.m in Sources */,
+				AAA3285C27D1AC4500A80BFB /* QRDSettingView.m in Sources */,
 				BC0F654321B7A371006C1A0B /* QRDUserView.m in Sources */,
+				AAA3285B27D1AC4500A80BFB /* QRDUserNameView.m in Sources */,
 				BC0F653A21B78257006C1A0B /* QRDNetworkUtil.m in Sources */,
-				AAA3282F27D06A3000A80BFB /* QRDSettingView.m in Sources */,
 				B0C660591F94F98300999C9F /* AppDelegate.m in Sources */,
 				B0C6606A1F94F98300999C9F /* main.m in Sources */,
-				BC0F652921B7708C006C1A0B /* UIView+Alert.m in Sources */,
+				AAA3285A27D1AC4500A80BFB /* QRDJoinRoomView.m in Sources */,
 				B07BB0CB2064E670009218C1 /* QRDAgreementViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

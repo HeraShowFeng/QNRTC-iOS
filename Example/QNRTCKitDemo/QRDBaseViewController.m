@@ -67,6 +67,11 @@
     return appId;
 }
 
+- (BOOL)redundantEnable {
+    NSNumber *redundant = [[NSUserDefaults standardUserDefaults] valueForKey:QN_REDUNDANT_ENABLE_KEY];
+    return [redundant boolValue];
+}
+
 - (BOOL)isAdmin {
     return [self.userId.lowercaseString isEqualToString:@"admin"];
 }
