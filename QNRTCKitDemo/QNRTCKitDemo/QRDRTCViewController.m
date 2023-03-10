@@ -47,12 +47,60 @@ UITextFieldDelegate
 */
 @property (nonatomic, assign) NSInteger serialNum;
 
+@property (nonatomic, strong) UISlider *volumeSlider;
 @end
 
 @implementation QRDRTCViewController
 
+// MangGouTV
+// 设备旋转通知
+- (void)deviceOrientationChange:(NSNotification *)notification {
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    AVCaptureVideoOrientation videoOrientation = AVCaptureVideoOrientationPortrait;
+    switch (orientation) {
+        case UIDeviceOrientationPortrait:
+            [self addLogString:@"OrientationPortrait"];
+            videoOrientation = AVCaptureVideoOrientationPortrait;
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            [self addLogString:@"OrientationLandscapeLeft"];
+            videoOrientation = AVCaptureVideoOrientationLandscapeRight;
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            [self addLogString:@"OrientationPortraitUpsideDown"];
+            videoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            [self addLogString:@"OrientationLandscapeRight"];
+            videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+            break;
+        case UIDeviceOrientationUnknown:
+            [self addLogString:@"OrientationUnknown"];
+            break;
+        case UIDeviceOrientationFaceUp:
+            [self addLogString:@"OrientationFaceUp"];
+            break;
+        case UIDeviceOrientationFaceDown:
+            [self addLogString:@"OrientationFaceDown"];
+            break;
+        default:
+            break;
+    }
+    if (self.cameraTrack) {
+        self.cameraTrack.videoOrientation = videoOrientation;
+    }
+}
+
 - (void)dealloc {
     [self removeNotification];
+    
+    // MangGouTV
+    // 移除 设备旋转通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    // MangGouTV
+    // 结束 设备旋转通知
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 }
 
 - (void)viewDidLoad {
@@ -78,70 +126,17 @@ UITextFieldDelegate
     // 发送请求获取进入房间的 Token
     [self requestToken];
     
-    self.logButton = [[UIButton alloc] init];
-    [self.logButton setImage:[UIImage imageNamed:@"log-btn"] forState:UIControlStateNormal];
-    [self.logButton addTarget:self action:@selector(logAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.logButton];
-    [self.view bringSubviewToFront:self.tableView];
+    [self setupOtherButtons];
     
-    [self.logButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(0);
-        make.top.equalTo(self.mas_topLayoutGuide);
-        make.size.equalTo(CGSizeMake(50, 50));
-    }];
-    
-    self.mergeButton = [[UIButton alloc] init];
-    [self.mergeButton setImage:[UIImage imageNamed:@"stream_merge"] forState:UIControlStateNormal];
-    [self.mergeButton addTarget:self action:@selector(mergeAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.mergeButton];
+    // MangGouTV
+    // 开始 设备旋转通知
+    if (![UIDevice currentDevice].generatesDeviceOrientationNotifications) {
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    }
 
-    UILabel *mergeLabel = [[UILabel alloc] init];
-    mergeLabel.font = [UIFont systemFontOfSize:14];
-    mergeLabel.textAlignment = NSTextAlignmentCenter;
-    mergeLabel.textColor = [UIColor whiteColor];
-    mergeLabel.text = @"合流转推";
-    [self.view addSubview:mergeLabel];
-    
-    self.forwardButton = [[UIButton alloc] init];
-    [self.forwardButton setImage:[UIImage imageNamed:@"signal_stream"] forState:UIControlStateNormal];
-    [self.forwardButton addTarget:self action:@selector(forwardAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_forwardButton];
-    
-    self.forwardLabel = [[UILabel alloc] init];
-    self.forwardLabel.font = [UIFont systemFontOfSize:14];
-    self.forwardLabel.textAlignment = NSTextAlignmentCenter;
-    self.forwardLabel.textColor = [UIColor whiteColor];
-    self.forwardLabel.text = @"单路转推";
-    [self.view addSubview:_forwardLabel];
-    
-    [self.mergeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view).offset(-12);
-        make.top.equalTo(self.mas_topLayoutGuide);
-        make.size.equalTo(CGSizeMake(55, 55));
-    }];
-    
-    [mergeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mergeButton);
-        make.top.equalTo(self.mergeButton.mas_bottom).offset(2);
-    }];
-    
-    [self.forwardButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view).offset(-12);
-        make.top.equalTo(self.mergeButton).offset(80);
-        make.size.equalTo(CGSizeMake(55, 50));
-    }];
-    
-    [self.forwardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.forwardButton);
-        make.top.equalTo(self.forwardButton.mas_bottom).offset(2);
-    }];
-    
-    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.logButton);
-        make.top.equalTo(self.logButton.mas_bottom);
-        make.width.height.equalTo(self.view).multipliedBy(0.6);
-    }];
-    self.tableView.hidden = YES;
+    // MangGouTV
+    // 添加 设备旋转通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)conferenceAction:(UIButton *)conferenceButton {
@@ -242,7 +237,7 @@ UITextFieldDelegate
 //    self.cameraTrack.encodeMirrorFrontFacing = YES;
     
     // 设置预览
-    self.preview.fillMode = QNVideoFillModePreserveAspectRatioAndFill;
+    self.preview.fillMode = QNVideoFillModePreserveAspectRatio;
     [self.cameraTrack play:self.preview];
     
     [self.colorView addSubview:self.preview];
@@ -339,6 +334,103 @@ UITextFieldDelegate
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.mas_bottomLayoutGuide);
         make.top.equalTo(preView.mas_top);
+    }];
+}
+
+- (void)setupOtherButtons {
+    self.logButton = [[UIButton alloc] init];
+    [self.logButton setImage:[UIImage imageNamed:@"log-btn"] forState:UIControlStateNormal];
+    [self.logButton addTarget:self action:@selector(logAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.logButton];
+    [self.view bringSubviewToFront:self.tableView];
+    
+    [self.logButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(0);
+        make.top.equalTo(self.mas_topLayoutGuide);
+        make.size.equalTo(CGSizeMake(50, 50));
+    }];
+    
+    self.mergeButton = [[UIButton alloc] init];
+    [self.mergeButton setImage:[UIImage imageNamed:@"stream_merge"] forState:UIControlStateNormal];
+    [self.mergeButton addTarget:self action:@selector(mergeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.mergeButton];
+
+    UILabel *mergeLabel = [[UILabel alloc] init];
+    mergeLabel.font = [UIFont systemFontOfSize:14];
+    mergeLabel.textAlignment = NSTextAlignmentCenter;
+    mergeLabel.textColor = [UIColor whiteColor];
+    mergeLabel.text = @"合流转推";
+    [self.view addSubview:mergeLabel];
+    
+    self.forwardButton = [[UIButton alloc] init];
+    [self.forwardButton setImage:[UIImage imageNamed:@"signal_stream"] forState:UIControlStateNormal];
+    [self.forwardButton addTarget:self action:@selector(forwardAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_forwardButton];
+    
+    self.forwardLabel = [[UILabel alloc] init];
+    self.forwardLabel.font = [UIFont systemFontOfSize:14];
+    self.forwardLabel.textAlignment = NSTextAlignmentCenter;
+    self.forwardLabel.textColor = [UIColor whiteColor];
+    self.forwardLabel.text = @"单路转推";
+    [self.view addSubview:_forwardLabel];
+    
+    self.subscribeButton = [[UIButton alloc] init];
+    [self.subscribeButton setTitle:@"取消订阅" forState:UIControlStateNormal];
+    [self.subscribeButton setTitle:@"订阅" forState:UIControlStateSelected];
+    [self.subscribeButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [self.subscribeButton setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+    self.subscribeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.subscribeButton addTarget:self action:@selector(subscribeAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.subscribeButton];
+    
+    [self.mergeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view).offset(-12);
+        make.top.equalTo(self.mas_topLayoutGuide);
+        make.size.equalTo(CGSizeMake(55, 55));
+    }];
+    
+    [mergeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mergeButton);
+        make.top.equalTo(self.mergeButton.mas_bottom).offset(2);
+    }];
+    
+    [self.forwardButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view).offset(-12);
+        make.top.equalTo(self.mergeButton).offset(80);
+        make.size.equalTo(CGSizeMake(55, 50));
+    }];
+    
+    [self.forwardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.forwardButton);
+        make.top.equalTo(self.forwardButton.mas_bottom).offset(2);
+    }];
+    
+    [self.subscribeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view).offset(-12);
+        make.top.equalTo(self.forwardLabel).offset(80);
+        make.size.equalTo(CGSizeMake(65, 50));
+    }];
+    
+    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.logButton);
+        make.top.equalTo(self.logButton.mas_bottom);
+        make.width.height.equalTo(self.view).multipliedBy(0.6);
+    }];
+    self.tableView.hidden = YES;
+    
+    self.volumeSlider = [[UISlider alloc] init];
+    self.volumeSlider.value = 1.0;
+    [self.volumeSlider setMinimumValue:0];
+    [self.volumeSlider setMaximumValue:10];
+    [self.volumeSlider addTarget:self action:@selector(remoteVolumeSlider:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:_volumeSlider];
+    
+    [self.volumeSlider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(self.bottomButtonView.mas_top).offset(-50);
+        make.height.equalTo(50);
+        make.left.equalTo(self.view).offset(35);
+        make.right.equalTo(self.view).offset(-35);
     }];
 }
 
@@ -696,6 +788,26 @@ UITextFieldDelegate
     }
 }
 
+// MangGuoTV
+- (void)subscribeAction:(UIButton *)button {
+    button.selected = !button.selected;
+    NSMutableArray *usersArray = [NSMutableArray array];
+    for (QNRemoteUser *remoteUser in self.client.remoteUserList) {
+        [usersArray addObject:remoteUser.userID];
+    }
+    if (button.selected) {
+        [self unsubscribeVideoWithUserIds:usersArray];
+    } else{
+        [self subscribeVideoWithUserIds:usersArray];
+    }
+}
+
+// MangGuoTV
+- (void)remoteVolumeSlider:(UISlider *)slider {
+    double volume = slider.value;
+    [self setAllRemoteOutputVolume:volume];
+}
+
 - (void)publish {
     // 7.发布音频、视频 track
     if (!self.audioTrack) {
@@ -720,6 +832,51 @@ UITextFieldDelegate
             }
         });
     }];
+}
+
+// MangGuoTV
+// 设置远端音频 Track 播放音量，范围从 0 ~ 10
+- (void)setAllRemoteOutputVolume:(double)volume {
+    NSArray<QNRemoteUser *> *remoteUserList = self.client.remoteUserList;
+    for (QNRemoteUser *remoteUser in remoteUserList) {
+        for (QNRemoteAudioTrack *remoteAudioTrack in remoteUser.audioTrack) {
+            [remoteAudioTrack setVolume:volume];
+        }
+    }
+}
+
+// MangGuoTV
+// 订阅由 userId 指定的视频 track
+- (void)subscribeVideoWithUserIds:(NSArray<NSString *>*)userIds {
+    NSArray<QNRemoteUser *> *remoteUserList = self.client.remoteUserList;
+    NSMutableArray *targetTrackArray = [NSMutableArray array];
+    for (QNRemoteUser *remoteUser in remoteUserList) {
+        for (NSString *userID in userIds) {
+            if ([remoteUser.userID isEqualToString:remoteUser.userID]) {
+                for (QNRemoteVideoTrack *remoteVideoTrack in remoteUser.videoTrack) {
+                    [targetTrackArray addObject:remoteVideoTrack];
+                }
+            }
+        }
+    }
+    [self.client subscribe:targetTrackArray];
+}
+
+// MangGuoTV
+// 取消订阅由 userId 指定的视频 track
+- (void)unsubscribeVideoWithUserIds:(NSArray<NSString *>*)userIds {
+    NSArray<QNRemoteUser *> *remoteUserList = self.client.remoteUserList;
+    NSMutableArray *targetTrackArray = [NSMutableArray array];
+    for (QNRemoteUser *remoteUser in remoteUserList) {
+        for (NSString *userID in userIds) {
+            if ([remoteUser.userID isEqualToString:remoteUser.userID]) {
+                for (QNRemoteVideoTrack *remoteVideoTrack in remoteUser.videoTrack) {
+                    [targetTrackArray addObject:remoteVideoTrack];
+                }
+            }
+        }
+    }
+    [self.client unsubscribe:targetTrackArray];
 }
 
 - (void)showAlertWithMessage:(NSString *)message title:(NSString *)title completionHandler:(void (^)(void))handler
