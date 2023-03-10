@@ -52,7 +52,7 @@ UITextFieldDelegate
 
 @implementation QRDRTCViewController
 
-// MangGouTV
+// MangGuoTV
 // 设备旋转通知
 - (void)deviceOrientationChange:(NSNotification *)notification {
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
@@ -94,11 +94,11 @@ UITextFieldDelegate
 - (void)dealloc {
     [self removeNotification];
     
-    // MangGouTV
+    // MangGuoTV
     // 移除 设备旋转通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     
-    // MangGouTV
+    // MangGuoTV
     // 结束 设备旋转通知
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 }
@@ -128,13 +128,13 @@ UITextFieldDelegate
     
     [self setupOtherButtons];
     
-    // MangGouTV
+    // MangGuoTV
     // 开始 设备旋转通知
     if (![UIDevice currentDevice].generatesDeviceOrientationNotifications) {
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     }
 
-    // MangGouTV
+    // MangGuoTV
     // 添加 设备旋转通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
@@ -852,10 +852,11 @@ UITextFieldDelegate
     NSMutableArray *targetTrackArray = [NSMutableArray array];
     for (QNRemoteUser *remoteUser in remoteUserList) {
         for (NSString *userID in userIds) {
-            if ([remoteUser.userID isEqualToString:remoteUser.userID]) {
+            if ([userID isEqualToString:remoteUser.userID]) {
                 for (QNRemoteVideoTrack *remoteVideoTrack in remoteUser.videoTrack) {
                     [targetTrackArray addObject:remoteVideoTrack];
                 }
+                break;
             }
         }
     }
@@ -869,10 +870,11 @@ UITextFieldDelegate
     NSMutableArray *targetTrackArray = [NSMutableArray array];
     for (QNRemoteUser *remoteUser in remoteUserList) {
         for (NSString *userID in userIds) {
-            if ([remoteUser.userID isEqualToString:remoteUser.userID]) {
+            if ([userID isEqualToString:remoteUser.userID]) {
                 for (QNRemoteVideoTrack *remoteVideoTrack in remoteUser.videoTrack) {
                     [targetTrackArray addObject:remoteVideoTrack];
                 }
+                break;
             }
         }
     }
