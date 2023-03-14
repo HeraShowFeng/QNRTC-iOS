@@ -31,5 +31,3 @@ FOUNDATION_EXPORT const unsigned char QNRTCKitVersionString[];
 #import <QNRTCKit/QNRTCConfiguration.h>
 #import <QNRTCKit/QNForwardStreamConfiguration.h>
 #import <QNRTCKit/QNTrackSubConfiguration.h>
-#import <QNRTCKit/QNRoomMediaRelayInfo.h>
-#import <QNRTCKit/QNRoomMediaRelayConfiguration.h>

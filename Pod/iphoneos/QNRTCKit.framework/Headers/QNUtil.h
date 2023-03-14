@@ -22,7 +22,4 @@
 
 + (void)scaleWithSat:(AudioBuffer *)audioBuffer scale:(double)scale max:(float)max min:(float) min;
 
-+ (NSInteger)findSimulcastLowAndMediumBpsWithOriginalWidth:(NSInteger)originalWidth
-                                            originalHeight:(NSInteger) originalHeight;
-
 @end

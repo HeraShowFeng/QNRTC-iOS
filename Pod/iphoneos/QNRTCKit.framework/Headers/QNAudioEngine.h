@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  QNAudioEngine 在运行过程中，音频状态发生变化的回调
  
+ @warning PCM 混音时，不会回调 QNAudioPlayStateReady、QNAudioPlayStateBuffering、QNAudioPlayStateCompleted、QNAudioPlayStateUnknow
+
  @param audioEngine QNAudioEngine
  @param playState 播放状态
  
@@ -37,12 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  QNAudioEngine 在运行过程中，混音进度的回调
  
+ @warning 仅在文件混音时有效
+
  @discussion 混音进度不被 loopPlay 影响，跟当前时间 currentTime 节奏一致，当 currentTime 达到总时长后，会从 0 重新开始。
  
  @param audioEngine QNAudioEngine
  @param mixProgressRate 混音进度
  
- @since v2.2.0
+ @since v2.2.0 无效
  */
 - (void)audioEngine:(QNAudioEngine *)audioEngine mixProgressRate:(float)mixProgressRate;
 
@@ -85,6 +89,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)audioEngine:(QNAudioEngine *)audioEngine mixedSourceDidGetAudioBuffer:(AudioBuffer *)audioBuffer asbd:(const AudioStreamBasicDescription *)asbd;
 
+/**
+ QNAudioEngine 在运行过程中，混音数据的回调
+ 
+ @warning 仅在 PCM 混音时回调，需要在该回调替换 ioData 为需要参与混音的 PCM 数据
+ 
+ @param audioEngine QNAudioEngine
+ @param ioData 音频数据
+ @param inNumberFrames 音频数据个数
+ 
+ @since v2.2.0
+ */
+- (void)audioEngine:(QNAudioEngine *)audioEngine pcmAudioBuffer:(AudioBufferList *)ioData numberFrames:(UInt32)inNumberFrames;
+
 @end
 
 @interface QNAudioEngine : NSObject
@@ -104,7 +121,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<QNAudioEngineDelegate> delegate;
 
 /*!
- * @abstract 音频地址。
+ * @abstract 音频文件地址。
+ *
+ * @warning 文件混音时设置，一旦设置，PCM 混音将无效
  *
  * @discussion 音频地址支持本地音频或 mp3 格式的在线音频
  *
@@ -113,7 +132,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSURL *audioURL;
 
 /*!
+ * @abstract PCM 音频格式。
+ *
+ * @warning PCM 混音时设置，需对应实际参与混音的 PCM 数据格式
+ *
+ * @since v3.1.2
+ */
+@property (nonatomic, assign) AudioStreamBasicDescription pcmASBD;
+
+/*!
  * @abstract 音频是否正在播放。
+ *
+ * @warning 仅在文件混音时有效
  *
  * @since v2.2.0
  */
@@ -122,19 +152,22 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @abstract 是否开启返听，默认为 NO。
  *
- * @warning 耳返功能建议在用户戴耳机的状态下开启，当用户未戴耳机时，耳返将从设备听筒播放；
+ * @warning 仅在文件混音时有效
+ *          耳返功能建议在用户戴耳机的状态下开启，当用户未戴耳机时，耳返将从设备听筒播放；
  *          混音过程中，当返听从关闭切换到开启时，音乐声音相对会变小，这是由于系统对于人声+音乐声同时输出播放的优化，避免两个输出源音频波形叠加过高，可能带来的刺耳声。
  *
- * @since v2.2.0
+ * @since v2.2.0 无效
  */
 @property (nonatomic, assign) BOOL playBack;
 
 /*!
  * @abstract 混音进度。
  *
+ * @warning 仅在文件混音时有效
+ *
  * @discussion 取值范围 0 ～ 1.0。
  *
- * @since v2.2.0
+ * @since v2.2.0 无效
  */
 @property (nonatomic, assign, readonly) float progressRate;
 
@@ -159,6 +192,8 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @abstract 音乐音频播放音量大小。
  *
+ * @warning 仅在文件混音时有效
+ *
  * @discussion 取值范围 0 ～ 1.0。注意：当设置音乐音频输入音量为 0 时，则音乐播放静音。
  *
  * @since v3.0.1
@@ -168,30 +203,38 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @abstract 播放的当前时间。
  *
- * @since v2.2.0
+ * @warning 仅在文件混音时有效
+ *
+ * @since v2.2.0 无效
  */
 @property (nonatomic, assign, readonly) NSTimeInterval currentTime;
 
 /*!
  * @abstract 音频总时长。
  *
+ * @warning 仅在文件混音时有效
+ *
  * @discussion 音频未开始播放前，当 playState 为 QNAudioPlayStateReady 时，totalTime 有值。
  *
- * @since v2.2.0
+ * @since v2.2.0 无效
  */
 @property (nonatomic, assign, readonly) NSTimeInterval duration;
 
 /*!
  * @abstract 是否循环播放音频。
  *
+ * @warning 仅在文件混音时有效
+ *
  * @discussion 循环播放音频，则处于一直循环，playState 不会变为 QNAudioPlayStateCompleted，progressRate 则与当前时间 currentTime 节奏一致。
  *
- * @since v2.2.0
+ * @since v2.2.0 无效
  */
 @property (nonatomic, assign) BOOL loopPlay;
 
 /*!
  * @abstract 混合进度回调的时间间隔。
+ *
+ * @warning 仅在文件混音时有效
  *
  * @discussion 单位为秒。默认为 0，即默认不回调混合进度。
  *
@@ -201,6 +244,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  * @abstract 定位到指定播放的时间点。
+ *
+ * @warning 仅在文件混音时有效
  *
  * @param time seek 的时间位置。
  *
@@ -213,6 +258,8 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @abstract 开始混音
  *
+ * @discussion 调用后，playState 对应 QNAudioPlayStatePlaying。
+ *
  * @return 是否 start 成功
  *
  * @since v2.2.0
@@ -221,6 +268,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  * @abstract 停止混音
+ *
+ * @discussion 调用后，playState 对应 QNAudioPlayStateStoped。
  *
  * @return 是否 stop 成功
  *
@@ -231,12 +280,16 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @abstract 暂停混音
  *
+ * @discussion 调用后，playState 对应 QNAudioPlayStatePaused。
+ *
  * @since v2.2.0
  */
 - (void)pauseAudioMixing;
 
 /*!
  * @abstract 恢复混音
+ *
+ * @discussion 调用后，playState 对应 QNAudioPlayStatePlaying。
  *
  * @since v2.2.0
  */
